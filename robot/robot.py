@@ -1,6 +1,7 @@
 import magicbot
 import wpilib
 import wpilib.drive
+from wpilib.buttons import JoystickButton
 
 
 class Robot(magicbot.MagicRobot):
@@ -8,6 +9,9 @@ class Robot(magicbot.MagicRobot):
     extended = False
     request_extended = False
     def createObjects(self):
+        # For teleop auto
+        self.robot = self
+
         self.controller = wpilib.XboxController(0)
         self.lf_motor = wpilib.Talon(2)
         self.lr_motor = wpilib.Talon(1)
@@ -19,6 +23,13 @@ class Robot(magicbot.MagicRobot):
 
         self.hatch_solenoid = wpilib.DoubleSolenoid(1, 2)
         self.btn_hatch = JoystickButton(self.controller, 5)  # left bumper button
+
+    def autonomous(self):
+        """
+        Prepare for and start autonomous mode.
+        """
+        # Call autonomous
+        super().autonomous()
 
     def teleopPeriodic(self):
         self.train.driveTank(self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kLeft),
