@@ -25,7 +25,8 @@ class Robot(magicbot.MagicRobot):
 
         self.extend_solenoid = wpilib.DoubleSolenoid(0, 1)
         self.grab_solenoid = wpilib.DoubleSolenoid(2, 3)
-        self.btn_hatch = JoystickButton(self.controller, 5)  # left bumper button
+
+        self.button_hatch = JoystickButton(self.controller, 5)  # left bumper button
 
         wpilib.CameraServer.launch('camera/camera.py:main')
         wpilib.LiveWindow.disableAllTelemetry()
@@ -41,7 +42,7 @@ class Robot(magicbot.MagicRobot):
         self.train.tankDrive(-self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kLeft),
                              -self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kRight))
 
-        self.extended = self.btn_hatch.get()
+        self.extended = self.button_hatch.get()
 
         if self.request_extended != self.extended:
             self.extended = self.request_extended
