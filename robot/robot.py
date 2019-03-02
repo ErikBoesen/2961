@@ -24,6 +24,9 @@ class Robot(magicbot.MagicRobot):
         self.hatch_solenoid = wpilib.DoubleSolenoid(1, 2)
         self.btn_hatch = JoystickButton(self.controller, 5)  # left bumper button
 
+        wpilib.CameraServer.launch('camera/camera.py:main')
+        wpilib.LiveWindow.disableAllTelemetry()
+
     def autonomous(self):
         """
         Prepare for and start autonomous mode.
