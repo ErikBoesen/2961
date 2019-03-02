@@ -27,6 +27,7 @@ class Robot(magicbot.MagicRobot):
         self.grab_solenoid = wpilib.DoubleSolenoid(2, 3)
 
         self.button_hatch = JoystickButton(self.controller, 5)  # left bumper button
+        self.button_grab = JoystickButton(self.controller, 1)  # A
 
         wpilib.CameraServer.launch('camera/camera.py:main')
         wpilib.LiveWindow.disableAllTelemetry()
@@ -43,6 +44,7 @@ class Robot(magicbot.MagicRobot):
                              -self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kRight))
 
         self.extended = self.button_hatch.get()
+        self.grab = self.button_grab.get()
 
         if self.request_extended != self.extended:
             self.extended = self.request_extended
