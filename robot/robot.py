@@ -35,8 +35,8 @@ class Robot(magicbot.MagicRobot):
         super().autonomous()
 
     def teleopPeriodic(self):
-        self.train.tankDrive(self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kLeft),
-                             self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kRight))
+        self.train.tankDrive(-self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kLeft),
+                             -self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kRight))
 
         self.extended = self.btn_hatch.get()
 
