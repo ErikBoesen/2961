@@ -1,0 +1,9 @@
+[
+  "magicbot_test.py::test_all_autonomous[]",
+  "pyfrc_test.py::test_autonomous[]",
+  "pyfrc_test.py::test_disabled",
+  "pyfrc_test.py::test_operator_control",
+  "pyfrc_test.py::test_practice",
+  "pyfrc_test.py::test_docstrings",
+  "pyfrc_test.py::test_fuzz"
+]

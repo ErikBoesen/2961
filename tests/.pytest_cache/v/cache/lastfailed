@@ -1,0 +1,10 @@
+{
+  "magicbot_test.py::test_all_autonomous[LLL]": true,
+  "magicbot_test.py::test_all_autonomous[LRL]": true,
+  "magicbot_test.py::test_all_autonomous[RLR]": true,
+  "magicbot_test.py::test_all_autonomous[RRR]": true,
+  "pyfrc_test.py::test_autonomous[LLL]": true,
+  "pyfrc_test.py::test_autonomous[LRL]": true,
+  "pyfrc_test.py::test_autonomous[RLR]": true,
+  "pyfrc_test.py::test_autonomous[RRR]": true
+}
