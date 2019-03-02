@@ -8,6 +8,8 @@ class Robot(magicbot.MagicRobot):
     # TODO bad
     extended = False
     request_extended = False
+    grab = False
+    request_grab = False
     def createObjects(self):
         # For teleop auto
         self.robot = self
@@ -21,7 +23,8 @@ class Robot(magicbot.MagicRobot):
         self.train = wpilib.drive.DifferentialDrive(wpilib.SpeedControllerGroup(self.lf_motor, self.lr_motor),
                                                     wpilib.SpeedControllerGroup(self.rf_motor, self.rr_motor))
 
-        self.extend_solenoid = wpilib.DoubleSolenoid(1, 2)
+        self.extend_solenoid = wpilib.DoubleSolenoid(0, 1)
+        self.grab_solenoid = wpilib.DoubleSolenoid(2, 3)
         self.btn_hatch = JoystickButton(self.controller, 5)  # left bumper button
 
         wpilib.CameraServer.launch('camera/camera.py:main')
@@ -43,6 +46,10 @@ class Robot(magicbot.MagicRobot):
         if self.request_extended != self.extended:
             self.extended = self.request_extended
             self.extend_solenoid.set(wpilib.DoubleSolenoid.Value.kForward if self.extended else wpilib.DoubleSolenoid.Value.kReverse)
+
+        if self.request_grab != self.grab:
+            self.grab = self.request_grab
+            self.grab_solenoid.set(wpilib.DoubleSolenoid.Value.kReverse if self.grab else wpilib.DoubleSolenoid.Value.kReverse)
 
 
 if __name__ == '__main__':
