@@ -41,3 +41,6 @@ class Robot(magicbot.MagicRobot):
             self.extended = self.request_extended
             self.hatch_solenoid.set(wpilib.DoubleSolenoid.Value.kForward if self.extended else wpilib.DoubleSolenoid.Value.kReverse)
 
+
+if __name__ == '__main__':
+    wpilib.run(Robot)
