@@ -21,7 +21,7 @@ class Robot(magicbot.MagicRobot):
         self.train = wpilib.drive.DifferentialDrive(wpilib.SpeedControllerGroup(self.lf_motor, self.lr_motor),
                                                     wpilib.SpeedControllerGroup(self.rf_motor, self.rr_motor))
 
-        self.hatch_solenoid = wpilib.DoubleSolenoid(1, 2)
+        self.extend_solenoid = wpilib.DoubleSolenoid(1, 2)
         self.btn_hatch = JoystickButton(self.controller, 5)  # left bumper button
 
         wpilib.CameraServer.launch('camera/camera.py:main')
@@ -42,7 +42,7 @@ class Robot(magicbot.MagicRobot):
 
         if self.request_extended != self.extended:
             self.extended = self.request_extended
-            self.hatch_solenoid.set(wpilib.DoubleSolenoid.Value.kForward if self.extended else wpilib.DoubleSolenoid.Value.kReverse)
+            self.extend_solenoid.set(wpilib.DoubleSolenoid.Value.kForward if self.extended else wpilib.DoubleSolenoid.Value.kReverse)
 
 
 if __name__ == '__main__':
