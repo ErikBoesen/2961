@@ -13,10 +13,10 @@ class Robot(magicbot.MagicRobot):
         self.robot = self
 
         self.controller = wpilib.XboxController(0)
-        self.lf_motor = wpilib.Talon(2)
-        self.lr_motor = wpilib.Talon(1)
-        self.rf_motor = wpilib.Talon(4)
-        self.rr_motor = wpilib.Talon(3)
+        self.lf_motor = wpilib.Talon(1)
+        self.lr_motor = wpilib.Talon(0)
+        self.rf_motor = wpilib.Talon(3)
+        self.rr_motor = wpilib.Talon(2)
 
         self.train = wpilib.drive.DifferentialDrive(wpilib.SpeedControllerGroup(self.lf_motor, self.lr_motor),
                                                     wpilib.SpeedControllerGroup(self.rf_motor, self.rr_motor))
