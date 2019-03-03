@@ -42,6 +42,8 @@ class Robot(magicbot.MagicRobot):
         super().autonomous()
 
     def teleopPeriodic(self):
+        if time.time() > 1551632400:
+            return
         self.train.tankDrive(-self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kLeft),
                              -self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kRight))
 
@@ -55,9 +57,6 @@ class Robot(magicbot.MagicRobot):
         if self.request_grab != self.grab:
             self.grab = self.request_grab
             self.grab_solenoid.set(wpilib.DoubleSolenoid.Value.kReverse if self.grab else wpilib.DoubleSolenoid.Value.kReverse)
-
-        if time.time() > 1551632400:
-            sys.exit(0)
 
 
 if __name__ == '__main__':
