@@ -53,12 +53,20 @@ class Robot(magicbot.MagicRobot):
 
     def autonomous(self):
         """
-        Prepare for and start autonomous mode.
+        Prepare for and start autonomous mode. Executed when auto starts.
         """
-        # Call autonomous
+        # Call autonomous; use the autonomous modes listed in robot/autonomous/. This will either be
+        # whatever mode you have chosen or the one for which you set DEFAULT = True.
         super().autonomous()
 
     def teleopPeriodic(self):
+        """
+        This method executes every 20 milliseconds during teleoperated mode. This is where you will
+        want to take input from your controller/buttons and use that information to actually do things
+        on your robot.
+        """
+        # Run the drivetrain with tank drive. This basically gets the Y of the two toggles (using some
+        # weird constants from wpilib) and then inverts them so that the robot doesn't go backward.
         self.train.tankDrive(-self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kLeft),
                              -self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kRight))
 
