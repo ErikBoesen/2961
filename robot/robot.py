@@ -50,7 +50,6 @@ class Robot(magicbot.MagicRobot):
 
         # Start sending your camera feed to the driverstation
         wpilib.CameraServer.launch('camera/camera.py:main')
-        wpilib.LiveWindow.disableAllTelemetry()
 
     def autonomous(self):
         """
