@@ -7,11 +7,6 @@ import sys
 
 
 class Robot(magicbot.MagicRobot):
-    # TODO bad
-    extended = False
-    request_extended = False
-    grab = False
-    request_grab = False
     def createObjects(self):
         # For teleop autonomous, we have to do this so that the autonomous can call teleopPeriodic.
         self.robot = self
@@ -52,6 +47,15 @@ class Robot(magicbot.MagicRobot):
         # This basically runs the file you give it with the function you specify.
         wpilib.CameraServer.launch('camera/camera.py:main')
 
+    def robotInit(self):
+        """
+        This method runs when the robot starts running.
+        """
+        self.extended = self.extend_solenoid.get()
+        self.grab = self.grab_solenoid.get()
+        self.request_extended = self.extended
+        self.request_grab = self.grab
+
     def autonomous(self):
         """
         Prepare for and start autonomous mode. Executed when auto starts.
@@ -72,8 +76,10 @@ class Robot(magicbot.MagicRobot):
                              -self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kRight))
 
         # Get values from buttons for whether we WANT to extend the pistons this time around.
-        self.request_extended = self.button_hatch.get()
-        self.request_grab = self.button_grab.get()
+        # Use constants for whether solenoids are extended. You could technically just use 1 and 3,
+        # but this is just a bit more clear what you're doing.
+        self.request_extended = wpilib.DoubleSolenoid.Value.kForward if self.button_hatch.get() else wpilib.DoubleSolenoid.Value.kReverse
+        self.request_grab = wpilib.DoubleSolenoid.Value.kForward if self.button_grab.get() else wpilib.DoubleSolenoid.Value.kReverse
 
         # If we want to change whether the pistons are in or out, do that.
         # Otherwise don't do anything.
@@ -82,12 +88,12 @@ class Robot(magicbot.MagicRobot):
         # and it was making our drivetrain jam up because it was taking so much time for the loop to run.
         if self.request_extended != self.extended:
             self.extended = self.request_extended
-            self.extend_solenoid.set(wpilib.DoubleSolenoid.Value.kForward if self.extended else wpilib.DoubleSolenoid.Value.kReverse)
+            self.extend_solenoid.set(self.extended)
 
         # Just the same thing, but for the grabbing pistons this time.
         if self.request_grab != self.grab:
             self.grab = self.request_grab
-            self.grab_solenoid.set(wpilib.DoubleSolenoid.Value.kReverse if self.grab else wpilib.DoubleSolenoid.Value.kReverse)
+            self.grab_solenoid.set(self.grab)
 
 
 # Just make the robot run when the file is run
