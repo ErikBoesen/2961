@@ -70,17 +70,25 @@ class Robot(magicbot.MagicRobot):
         self.train.tankDrive(-self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kLeft),
                              -self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kRight))
 
+        # Get values from buttons for whether we WANT to extend the pistons this time around.
         self.request_extended = self.button_hatch.get()
         self.request_grab = self.button_grab.get()
 
+        # If we want to change whether the pistons are in or out, do that.
+        # Otherwise don't do anything.
+        # In theory you could just set the position of the piston using the button value every single time.
+        # But then it would send the signal every time, even when it's not needed. This causes a lot of slowness,
+        # and it was making our drivetrain jam up because it was taking so much time for the loop to run.
         if self.request_extended != self.extended:
             self.extended = self.request_extended
             self.extend_solenoid.set(wpilib.DoubleSolenoid.Value.kForward if self.extended else wpilib.DoubleSolenoid.Value.kReverse)
 
+        # Just the same thing, but for the grabbing pistons this time.
         if self.request_grab != self.grab:
             self.grab = self.request_grab
             self.grab_solenoid.set(wpilib.DoubleSolenoid.Value.kReverse if self.grab else wpilib.DoubleSolenoid.Value.kReverse)
 
 
+# Just make the robot run when the file is run
 if __name__ == '__main__':
     wpilib.run(Robot)
