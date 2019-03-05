@@ -38,7 +38,7 @@ class Robot(magicbot.MagicRobot):
         # You can technically use functions like self.controller.getAButton() to check whether
         # a certain button is pressed, but I prefer this method because then you can name your
         # buttons and it is a little bit clearer what button is what.
-        self.button_hatch = JoystickButton(self.controller, 5)  # left bumper button
+        self.button_extend = JoystickButton(self.controller, 5)  # left bumper button
         self.button_grab = JoystickButton(self.controller, 1)  # A
         # If you need to check what button is what on your controller, reference this page in the RobotPy
         # documentation: https://robotpy.readthedocs.io/projects/wpilib/en/latest/wpilib/XboxController.html
@@ -78,7 +78,7 @@ class Robot(magicbot.MagicRobot):
         # Get values from buttons for whether we WANT to extend the pistons this time around.
         # Use constants for whether solenoids are extended. You could technically just use 1 and 3,
         # but this is just a bit more clear what you're doing.
-        self.request_extended = wpilib.DoubleSolenoid.Value.kForward if self.button_hatch.get() else wpilib.DoubleSolenoid.Value.kReverse
+        self.request_extended = wpilib.DoubleSolenoid.Value.kForward if self.button_extend.get() else wpilib.DoubleSolenoid.Value.kReverse
         self.request_grab = wpilib.DoubleSolenoid.Value.kForward if self.button_grab.get() else wpilib.DoubleSolenoid.Value.kReverse
 
         # If we want to change whether the pistons are in or out, do that.
