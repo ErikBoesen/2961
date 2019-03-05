@@ -26,8 +26,8 @@ class Robot(magicbot.MagicRobot):
         # all the motors on the left, one for all the motors on the right, and then passing both
         # of them in to wpilib.drive.DifferentialDrive, which handles all the calculations for driving
         # using tank drive so you don't have to do tons of unnecessary math yourself.
-        self.train = wpilib.drive.DifferentialDrive(wpilib.SpeedControllerGroup(self.lf_motor, self.lr_motor),
-                                                    wpilib.SpeedControllerGroup(self.rf_motor, self.rr_motor))
+        self.drivetrain = wpilib.drive.DifferentialDrive(wpilib.SpeedControllerGroup(self.lf_motor, self.lr_motor),
+                                                         wpilib.SpeedControllerGroup(self.rf_motor, self.rr_motor))
 
         # Create object for the solenoid you're using to extend out the hatch grabber, and another
         # for the solenoid you're using to actually grab the hatch.
@@ -72,8 +72,8 @@ class Robot(magicbot.MagicRobot):
         """
         # Run the drivetrain with tank drive. This basically gets the Y of the two toggles (using some
         # weird constants from wpilib) and then inverts them so that the robot doesn't go backward.
-        self.train.tankDrive(-self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kLeft),
-                             -self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kRight))
+        self.drivetrain.tankDrive(-self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kLeft),
+                                  -self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kRight))
 
         # Get values from buttons for whether we WANT to extend the pistons this time around.
         # Use constants for whether solenoids are extended. You could technically just use 1 and 3,
