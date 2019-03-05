@@ -4,24 +4,19 @@ from networktables import NetworkTables
 
 
 def main():
+    # Use cscore (Camera Server Core, I think) to send camera feed automatically.
     cs = CameraServer.getInstance()
+    # Make cscore show output in the driverstation console.
     cs.enableLogging()
 
+    # Get both USB cameras plugged in, and tell cscore to start sending them to the driverstation.
+    # You might wish to name these based on what part of the robot they're on, i.e. 'bottom_camera' etc.
     usb0 = cs.startAutomaticCapture(dev=0)
     usb1 = cs.startAutomaticCapture(dev=1)
 
     cs.waitForever()
 
 
-if __name__ == "__main__":
-
-    # To see messages from networktables, you must setup logging
-    import logging
-
-    logging.basicConfig(level=logging.DEBUG)
-
-    # You should uncomment these to connect to the RoboRIO
-    # import networktables
-    # networktables.initialize(server='10.xx.xx.2')
-
+# Automatically run main function when this file runs
+if __name__ == '__main__':
     main()

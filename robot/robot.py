@@ -49,6 +49,7 @@ class Robot(magicbot.MagicRobot):
         # documentation: https://robotpy.readthedocs.io/projects/wpilib/en/latest/wpilib/XboxController.html
 
         # Start sending your camera feed to the driverstation
+        # This basically runs the file you give it with the function you specify.
         wpilib.CameraServer.launch('camera/camera.py:main')
 
     def autonomous(self):
