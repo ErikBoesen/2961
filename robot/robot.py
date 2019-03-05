@@ -70,8 +70,8 @@ class Robot(magicbot.MagicRobot):
         self.train.tankDrive(-self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kLeft),
                              -self.controller.getY(hand=wpilib.interfaces.GenericHID.Hand.kRight))
 
-        self.extended = self.button_hatch.get()
-        self.grab = self.button_grab.get()
+        self.request_extended = self.button_hatch.get()
+        self.request_grab = self.button_grab.get()
 
         if self.request_extended != self.extended:
             self.extended = self.request_extended
